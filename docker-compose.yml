@@ -3,14 +3,30 @@ services:
   db:
     image: postgres:16
     container_name: ripplestocks-postgres
-    ports:
-      - "5433:5432"
+    restart: unless-stopped
     environment:
       POSTGRES_USER: ripplestocks
       POSTGRES_PASSWORD: ripplestocks
       POSTGRES_DB: ripplestocks
+    ports:
+      - "5433:5432"    
     volumes:
       - ripplestocks_pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ripplestocks -d ripplestocks"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+
+  adminer:
+    image: adminer:latest
+    container_name: ripplestocks-adminer
+    restart: unless-stopped
+    ports:
+      - "8080:8080"
+    depends_on:
+      db:
+        condition: service_healthy
+
 volumes:
   ripplestocks_pgdata:
-    external: true
