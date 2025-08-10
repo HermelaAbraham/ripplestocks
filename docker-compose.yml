@@ -1,0 +1,16 @@
+version: "3.8"
+services:
+  db:
+    image: postgres:16
+    container_name: ripplestocks-postgres
+    ports:
+      - "5433:5432"
+    environment:
+      POSTGRES_USER: ripplestocks
+      POSTGRES_PASSWORD: ripplestocks
+      POSTGRES_DB: ripplestocks
+    volumes:
+      - ripplestocks_pgdata:/var/lib/postgresql/data
+volumes:
+  ripplestocks_pgdata:
+    external: true
