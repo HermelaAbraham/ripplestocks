@@ -12,6 +12,8 @@ services:
       - "5433:5432"    
     volumes:
       - ripplestocks_pgdata:/var/lib/postgresql/data
+      - ./db/init:/docker-entrypoint-initdb.d
+
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U ripplestocks -d ripplestocks"]
       interval: 5s
