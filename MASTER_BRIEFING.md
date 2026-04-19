@@ -26,15 +26,20 @@ Validated against the Covid-19 test case (March 2020).
   - sentiment_scorer.py → FinBERT, 426 articles scored
   - Key finding: ZM anomaly (-0.75 sentiment, +113% price)
     due to security scandals masking demand surge
-- ⏳ Phase 3 — Graph construction UP NEXT
+- ✅ Phase 3 — Graph construction COMPLETE
   - graph_builder.py → NetworkX, 3 edge sources
   - Sources: domain knowledge + co-mentions + price correlation
-- ⏳ Phase 4 — Propagation model (3 models to compare)
-  - model1_graph_diffusion.py
-  - model2_random_forest.py
-  - model3_gnn.py
-  - model_comparison.py
-- ⏳ Phase 5 — Validation against Covid ground truth
+- ✅ Phase 4 — Propagation model COMPLETE
+  - model1_graph_diffusion.py → 50% accuracy (predicts all DOWN, misses winners)
+  - model2_random_forest.py → 80% accuracy (best model, misses ZM + SPY)
+  - model3_gnn.py → 70% accuracy (misses ZM, MRNA, SPY)
+  - model_comparison.py → comparison table generated
+  - Key finding: Random Forest wins
+  - Key anomaly: ZM (-0.75 sentiment vs +113% price) — ALL models get it wrong
+  - Core paper argument: sentiment alone insufficient, network propagation needed
+- ⏳ Phase 5 — Validation UP NEXT
+  - Formal validation against Covid-19 ground truth
+  - Metrics: directional accuracy, precision, recall per model
 - ⏳ Phase 6 — Dashboard UI
 
 ## Working Method
