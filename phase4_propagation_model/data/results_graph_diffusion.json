@@ -1,0 +1,62 @@
+[
+  {
+    "ticker": "UAL",
+    "raw_score": -2.783422,
+    "norm_score": -1.0,
+    "direction": "DOWN"
+  },
+  {
+    "ticker": "SPY",
+    "raw_score": -2.582205,
+    "norm_score": -0.927709,
+    "direction": "DOWN"
+  },
+  {
+    "ticker": "XOM",
+    "raw_score": -2.43789,
+    "norm_score": -0.875861,
+    "direction": "DOWN"
+  },
+  {
+    "ticker": "MSFT",
+    "raw_score": -2.358188,
+    "norm_score": -0.847226,
+    "direction": "DOWN"
+  },
+  {
+    "ticker": "MGM",
+    "raw_score": -2.273006,
+    "norm_score": -0.816623,
+    "direction": "DOWN"
+  },
+  {
+    "ticker": "AMZN",
+    "raw_score": -2.220769,
+    "norm_score": -0.797856,
+    "direction": "DOWN"
+  },
+  {
+    "ticker": "NFLX",
+    "raw_score": -1.49174,
+    "norm_score": -0.535938,
+    "direction": "DOWN"
+  },
+  {
+    "ticker": "AAL",
+    "raw_score": -1.0,
+    "norm_score": -0.35927,
+    "direction": "DOWN"
+  },
+  {
+    "ticker": "ZM",
+    "raw_score": -0.947794,
+    "norm_score": -0.340514,
+    "direction": "DOWN"
+  },
+  {
+    "ticker": "MRNA",
+    "raw_score": -0.836898,
+    "norm_score": -0.300672,
+    "direction": "DOWN"
+  }
+]

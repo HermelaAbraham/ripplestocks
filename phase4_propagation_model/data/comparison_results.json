@@ -1,0 +1,230 @@
+{
+  "accuracy": {
+    "graph_diffusion": 0.5,
+    "random_forest": 0.8,
+    "gnn": 0.7
+  },
+  "best_model": "Random Forest",
+  "per_ticker": [
+    {
+      "ticker": "ZM",
+      "ground_truth": {
+        "direction": "UP",
+        "return_pct": 113.2
+      },
+      "graph_diffusion": {
+        "direction": "DOWN",
+        "score": -0.9478,
+        "correct": false
+      },
+      "random_forest": {
+        "direction": "DOWN",
+        "confidence": 0.51,
+        "correct": false
+      },
+      "gnn": {
+        "direction": "DOWN",
+        "confidence": 0.9965,
+        "correct": false
+      }
+    },
+    {
+      "ticker": "MSFT",
+      "ground_truth": {
+        "direction": "UP",
+        "return_pct": 10.8
+      },
+      "graph_diffusion": {
+        "direction": "DOWN",
+        "score": -2.3582,
+        "correct": false
+      },
+      "random_forest": {
+        "direction": "UP",
+        "confidence": 0.785,
+        "correct": true
+      },
+      "gnn": {
+        "direction": "UP",
+        "confidence": 0.7187,
+        "correct": true
+      }
+    },
+    {
+      "ticker": "AMZN",
+      "ground_truth": {
+        "direction": "UP",
+        "return_pct": 25.0
+      },
+      "graph_diffusion": {
+        "direction": "DOWN",
+        "score": -2.2208,
+        "correct": false
+      },
+      "random_forest": {
+        "direction": "UP",
+        "confidence": 0.845,
+        "correct": true
+      },
+      "gnn": {
+        "direction": "UP",
+        "confidence": 0.8972,
+        "correct": true
+      }
+    },
+    {
+      "ticker": "NFLX",
+      "ground_truth": {
+        "direction": "UP",
+        "return_pct": 24.9
+      },
+      "graph_diffusion": {
+        "direction": "DOWN",
+        "score": -1.4917,
+        "correct": false
+      },
+      "random_forest": {
+        "direction": "UP",
+        "confidence": 0.9,
+        "correct": true
+      },
+      "gnn": {
+        "direction": "UP",
+        "confidence": 0.8444,
+        "correct": true
+      }
+    },
+    {
+      "ticker": "MRNA",
+      "ground_truth": {
+        "direction": "UP",
+        "return_pct": 141.1
+      },
+      "graph_diffusion": {
+        "direction": "DOWN",
+        "score": -0.8369,
+        "correct": false
+      },
+      "random_forest": {
+        "direction": "UP",
+        "confidence": 0.78,
+        "correct": true
+      },
+      "gnn": {
+        "direction": "DOWN",
+        "confidence": 0.9968,
+        "correct": false
+      }
+    },
+    {
+      "ticker": "AAL",
+      "ground_truth": {
+        "direction": "DOWN",
+        "return_pct": -56.4
+      },
+      "graph_diffusion": {
+        "direction": "DOWN",
+        "score": -1.0,
+        "correct": true
+      },
+      "random_forest": {
+        "direction": "DOWN",
+        "confidence": 0.785,
+        "correct": true
+      },
+      "gnn": {
+        "direction": "DOWN",
+        "confidence": 1.0,
+        "correct": true
+      }
+    },
+    {
+      "ticker": "UAL",
+      "ground_truth": {
+        "direction": "DOWN",
+        "return_pct": -65.2
+      },
+      "graph_diffusion": {
+        "direction": "DOWN",
+        "score": -2.7834,
+        "correct": true
+      },
+      "random_forest": {
+        "direction": "DOWN",
+        "confidence": 0.935,
+        "correct": true
+      },
+      "gnn": {
+        "direction": "DOWN",
+        "confidence": 1.0,
+        "correct": true
+      }
+    },
+    {
+      "ticker": "MGM",
+      "ground_truth": {
+        "direction": "DOWN",
+        "return_pct": -47.7
+      },
+      "graph_diffusion": {
+        "direction": "DOWN",
+        "score": -2.273,
+        "correct": true
+      },
+      "random_forest": {
+        "direction": "DOWN",
+        "confidence": 0.9,
+        "correct": true
+      },
+      "gnn": {
+        "direction": "DOWN",
+        "confidence": 1.0,
+        "correct": true
+      }
+    },
+    {
+      "ticker": "XOM",
+      "ground_truth": {
+        "direction": "DOWN",
+        "return_pct": -32.1
+      },
+      "graph_diffusion": {
+        "direction": "DOWN",
+        "score": -2.4379,
+        "correct": true
+      },
+      "random_forest": {
+        "direction": "DOWN",
+        "confidence": 0.75,
+        "correct": true
+      },
+      "gnn": {
+        "direction": "DOWN",
+        "confidence": 1.0,
+        "correct": true
+      }
+    },
+    {
+      "ticker": "SPY",
+      "ground_truth": {
+        "direction": "DOWN",
+        "return_pct": -9.2
+      },
+      "graph_diffusion": {
+        "direction": "DOWN",
+        "score": -2.5822,
+        "correct": true
+      },
+      "random_forest": {
+        "direction": "UP",
+        "confidence": 0.965,
+        "correct": false
+      },
+      "gnn": {
+        "direction": "UP",
+        "confidence": 0.9901,
+        "correct": false
+      }
+    }
+  ]
+}
