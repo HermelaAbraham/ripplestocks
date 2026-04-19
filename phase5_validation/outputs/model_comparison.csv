@@ -1,0 +1,17 @@
+ticker,ground_truth,gd_pred,gd_correct,gd_outcome,rf_pred,rf_correct,rf_outcome,rf_confidence,gnn_pred,gnn_correct,gnn_outcome,gnn_confidence,all_correct,zm_anomaly
+ZM,1,0,0,FN,0,0,FN,0.5100,0,0,FN,0.9965,0,1
+MSFT,1,0,0,FN,1,1,TP,0.7850,1,1,TP,0.7187,0,0
+AMZN,1,0,0,FN,1,1,TP,0.8450,1,1,TP,0.8972,0,0
+NFLX,1,0,0,FN,1,1,TP,0.9000,1,1,TP,0.8444,0,0
+MRNA,1,0,0,FN,1,1,TP,0.7800,0,0,FN,0.9968,0,0
+AAL,0,0,1,TN,0,1,TN,0.7850,0,1,TN,1.0000,1,0
+UAL,0,0,1,TN,0,1,TN,0.9350,0,1,TN,1.0000,1,0
+MGM,0,0,1,TN,0,1,TN,0.9000,0,1,TN,1.0000,1,0
+XOM,0,0,1,TN,0,1,TN,0.7500,0,1,TN,1.0000,1,0
+SPY,0,0,1,TN,1,0,FP,0.9650,1,0,FP,0.9901,0,0
+
+# METRICS SUMMARY
+# model,accuracy,precision,recall,f1,TP,FP,TN,FN
+# Graph Diffusion,0.5000,0.0000,0.0000,0.0000,0,0,5,5
+# Random Forest,0.8000,0.8000,0.8000,0.8000,4,1,4,1
+# GNN,0.7000,0.7500,0.6000,0.6667,3,1,4,2
