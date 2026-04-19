@@ -37,10 +37,15 @@ Validated against the Covid-19 test case (March 2020).
   - Key finding: Random Forest wins
   - Key anomaly: ZM (-0.75 sentiment vs +113% price) — ALL models get it wrong
   - Core paper argument: sentiment alone insufficient, network propagation needed
-- ⏳ Phase 5 — Validation UP NEXT
-  - Formal validation against Covid-19 ground truth
-  - Metrics: directional accuracy, precision, recall per model
-- ⏳ Phase 6 — Dashboard UI
+- ✅ Phase 5 — Validation COMPLETE
+  - validator.py → formal metrics against Covid-19 ground truth
+  - Graph Diffusion: 50% accuracy, F1 0.00 (predicts all DOWN)
+  - Random Forest:   80% accuracy, F1 0.80 (best model)
+  - GNN:             70% accuracy, F1 0.67
+  - ZM anomaly confirmed: ALL three models misclassified ZM
+    (-0.75 sentiment vs +113% price — headline tone ≠ fundamentals)
+  - Outputs: validation_report.txt + model_comparison.csv
+- ⏳ Phase 6 — Dashboard UI UP NEXT
 
 ## Working Method
 - CoCo (Claude chat) = architect, teacher, paper notes
@@ -147,6 +152,40 @@ and benchmarks three models — Graph Diffusion, Random Forest, and
 GNN — comparing performance on directional accuracy, precision, 
 and recall against the Covid-19 ground truth. This comparison forms 
 the core experimental contribution of the paper.
+
+### Phase 5 — Validation Results
+Formal validation of all three propagation models against the 
+Covid-19 ground truth (10 tickers, Jan 2 – Apr 30 2020) yielded 
+the following results. Graph Diffusion achieved 50% directional 
+accuracy with F1 = 0.00, exposing a structural limitation: the 
+model propagates negative shocks outward but has no mechanism to 
+flip a signal positive for sectors that benefit from a crisis, 
+resulting in all-DOWN predictions. Random Forest achieved 80% 
+accuracy with F1 = 0.80, correctly classifying 8 of 10 tickers 
+using four hand-crafted features (sentiment, graph proximity to 
+epicenter, volatility, article count). GNN achieved 70% accuracy 
+with F1 = 0.67, performing strongly on clear losers but 
+misclassifying outliers with sparse news coverage (ZM, MRNA, SPY). 
+Confusion matrix summary: GD (TP=0, FP=0, TN=5, FN=5), 
+RF (TP=4, FP=1, TN=4, FN=1), GNN (TP=3, FP=1, TN=4, FN=2).
+
+### Phase 5 — ZM Anomaly Analysis
+The ZM ticker was misclassified by all three models, representing 
+the most significant finding of the validation phase. ZM achieved 
+a FinBERT sentiment score of −0.75 (negative) due to concurrent 
+Zoom-bombing, encryption disputes, and institutional bans dominating 
+headlines. Despite this, ZM stock surged +113% over the same period 
+driven by unprecedented remote-work adoption. The Random Forest 
+predicted DOWN with only 51% confidence — effectively a coin flip — 
+while the GNN predicted DOWN with 100% confidence, demonstrating 
+that graph-propagated negative signals can overwhelm correct 
+structural reasoning when node features are sentiment-dominated. 
+This anomaly constitutes the central empirical motivation for the 
+paper's argument: network-level propagation models require structural 
+benefit-relationship features (which sectors gain from a crisis) 
+in addition to sentiment features to correctly classify demand-driven 
+outliers. The ZM case is presented as a named limitation and 
+direction for future work.
 
 ## 3-Line Project Summary (use at start of every Claude session)
 "I'm building RippleStocks, a 6-phase market analysis system that 
