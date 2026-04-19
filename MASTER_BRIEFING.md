@@ -187,6 +187,26 @@ in addition to sentiment features to correctly classify demand-driven
 outliers. The ZM case is presented as a named limitation and 
 direction for future work.
 
+## IEEE Paper Draft Status
+- Abstract → IN PROGRESS
+- Introduction → IN PROGRESS  
+- Related Work → pending
+- Methodology → pending
+- Experiments → pending
+- Results → pending
+- Discussion → pending
+- Future Work → pending
+- Conclusion → pending
+
+## Paper Writing Notes
+- Herms writes personal understanding sections
+- CoCo provides technical draft per section
+- Target venue: IEEE conference paper
+- Core contribution: network-based propagation 
+  vs isolated sentiment analysis
+- Key result: Random Forest 80% accuracy, F1 0.80
+- Star finding: ZM anomaly motivates entire approach
+
 ## 3-Line Project Summary (use at start of every Claude session)
 "I'm building RippleStocks, a 6-phase market analysis system that 
 predicts how macro-economic news events ripple through the financial 
