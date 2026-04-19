@@ -107,49 +107,69 @@ st.set_page_config(
 
 st.markdown("""
 <style>
-  /* Typography */
+  /* ── Base font size ── */
+  html, body, [class*="css"] { font-size: 16px; }
+
+  /* ── Main title ── */
   .main-title {
-    font-size:2.6rem; font-weight:700; letter-spacing:-1px;
-    background:linear-gradient(90deg,#1f77b4 0%,#2ca02c 100%);
-    -webkit-background-clip:text; -webkit-text-fill-color:transparent;
-    margin-bottom:2px;
+    font-size: 3rem; font-weight: 800; letter-spacing: -1px;
+    background: linear-gradient(90deg, #1f77b4 0%, #2ca02c 100%);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    margin-bottom: 4px;
   }
-  .subtitle { color:#888; font-size:1.05rem; margin-top:0; margin-bottom:0; }
-
-  /* Section headers */
-  .sec-header {
-    font-size:1.15rem; font-weight:600; color:#1f77b4;
-    border-left:4px solid #1f77b4; padding-left:10px;
-    margin:1.4rem 0 0.6rem 0;
+  .subtitle {
+    color: #555; font-size: 1.15rem; margin-top: 0; margin-bottom: 0;
   }
 
-  /* Cards */
+  /* ── Cards ── */
   .event-card {
-    background:#f0f4ff; border:1px solid #c8d8ff; border-radius:10px;
-    padding:16px 20px; margin-bottom:8px;
+    background: #f0f4ff; border: 1px solid #c8d8ff; border-radius: 10px;
+    padding: 20px 24px; margin-bottom: 8px; font-size: 1.05rem; line-height: 1.7;
   }
-  .event-card b { color:#1f77b4; }
+  .event-card b { color: #1f77b4; }
 
-  /* Anomaly banner */
+  /* ── Anomaly banner ── */
   .anomaly-box {
-    background:#fff8e1; border:1px solid #ffc107; border-radius:8px;
-    padding:12px 16px; margin:10px 0; font-size:0.92rem; line-height:1.5;
+    background: #fff8e1; border: 1px solid #ffc107; border-radius: 8px;
+    padding: 16px 20px; margin: 14px 0;
+    font-size: 1.05rem; line-height: 1.75;
   }
 
-  /* Experimental warning */
+  /* ── Experimental warning ── */
   .exp-banner {
-    background:#fff3cd; border:2px solid #ff9800; border-radius:8px;
-    padding:12px 18px; margin-bottom:12px; font-size:0.95rem;
+    background: #fff3cd; border: 2px solid #ff9800; border-radius: 8px;
+    padding: 14px 20px; margin-bottom: 16px; font-size: 1.05rem; line-height: 1.6;
   }
 
-  /* Sidebar phase list */
-  .phase-done    { color:#2ca02c; font-size:0.9rem; }
-  .phase-pending { color:#ff7f0e; font-size:0.9rem; }
+  /* ── Sidebar ── */
+  .phase-done    { color: #2ca02c; font-size: 1rem; line-height: 1.8; }
+  .phase-pending { color: #ff7f0e; font-size: 1rem; line-height: 1.8; }
+  section[data-testid="stSidebar"] { font-size: 1rem; }
+  section[data-testid="stSidebar"] p  { font-size: 1rem; }
+  section[data-testid="stSidebar"] li { font-size: 1rem; }
 
-  /* Footer */
+  /* ── Dataframe / table text ── */
+  [data-testid="stDataFrame"] * { font-size: 15px !important; }
+  [data-testid="stDataFrame"] th {
+    font-size: 15px !important; font-weight: 700 !important;
+    padding-top: 10px !important; padding-bottom: 10px !important;
+  }
+  [data-testid="stDataFrame"] td {
+    padding-top: 10px !important; padding-bottom: 10px !important;
+  }
+
+  /* ── Metric cards ── */
+  [data-testid="stMetricValue"]  { font-size: 2rem !important; font-weight: 700 !important; }
+  [data-testid="stMetricLabel"]  { font-size: 1rem !important; }
+  [data-testid="stMetricDelta"]  { font-size: 0.95rem !important; }
+
+  /* ── Section spacing ── */
+  .section-gap { margin-top: 2.2rem; }
+
+  /* ── Footer ── */
   .footer {
-    text-align:center; color:#aaa; font-size:0.82rem;
-    margin-top:2rem; padding-top:1rem; border-top:1px solid #eee;
+    text-align: center; color: #888; font-size: 0.95rem;
+    margin-top: 2.5rem; padding-top: 1.2rem; border-top: 1px solid #e0e0e0;
   }
 </style>
 """, unsafe_allow_html=True)
@@ -256,24 +276,26 @@ def draw_network(
     title:        str        = "",
 ) -> plt.Figure:
     """
-    Draw the market graph with matplotlib on a dark background.
+    Draw the market graph with matplotlib on a white background.
     Returns the Figure object.
     """
     fig, ax = plt.subplots(figsize=(10, 6.5))
-    fig.patch.set_facecolor("#0e1117")
-    ax.set_facecolor("#0e1117")
+    fig.patch.set_facecolor("white")
+    fig.patch.set_linewidth(1.5)
+    fig.patch.set_edgecolor("#dddddd")
+    ax.set_facecolor("white")
 
     pos = nx.spring_layout(G, seed=42, k=2.2, weight="weight")
 
     # Edge widths proportional to combined weight
-    edges     = list(G.edges(data=True))
-    weights   = [d["weight"] for _, _, d in edges]
-    max_w     = max(weights) if weights else 1
-    widths    = [max(0.5, (w / max_w) * 5.5) for w in weights]
-    alphas    = [max(0.15, w / max_w * 0.7)  for w in weights]
+    edges   = list(G.edges(data=True))
+    weights = [d["weight"] for _, _, d in edges]
+    max_w   = max(weights) if weights else 1
 
-    for (u, v, d), width, alpha in zip(edges, widths, alphas):
+    for (u, v, d), weight in zip(edges, weights):
         x0, y0 = pos[u]; x1, y1 = pos[v]
+        width = max(0.6, (weight / max_w) * 5.5)
+        alpha = max(0.18, weight / max_w * 0.65)
         ax.plot([x0, x1], [y0, y1],
                 color="#888888", linewidth=width, alpha=alpha, zorder=1)
 
@@ -285,30 +307,30 @@ def draw_network(
         G, pos, ax=ax,
         node_color=colours_list,
         node_size=sizes_list,
-        alpha=0.92, linewidths=2,
-        edgecolors=["#FFD700" if t == epicenter else "#ffffff" for t in G.nodes()],
+        alpha=0.92, linewidths=2.5,
+        edgecolors=["#FFD700" if t == epicenter else "#444444" for t in G.nodes()],
     )
 
-    # Labels
+    # Labels — dark text on white background
     for ticker, (x, y) in pos.items():
         ax.text(
             x, y, ticker,
             ha="center", va="center",
-            fontsize=9, fontweight="bold", color="white", zorder=5,
-            path_effects=[pe.withStroke(linewidth=2, foreground="#0e1117")],
+            fontsize=9.5, fontweight="bold", color="#1a1a1a", zorder=5,
+            path_effects=[pe.withStroke(linewidth=2.5, foreground="white")],
         )
         sector = SECTOR_LABELS.get(ticker, "")
         ax.text(
             x, y - 0.13, sector,
             ha="center", va="top",
-            fontsize=6.5, color="#cccccc", zorder=5,
+            fontsize=7, color="#555555", zorder=5,
         )
 
     if title:
-        ax.set_title(title, color="white", fontsize=11, pad=8, fontweight="600")
+        ax.set_title(title, color="#1a1a1a", fontsize=12, pad=10, fontweight="600")
 
     ax.axis("off")
-    plt.tight_layout(pad=0.5)
+    plt.tight_layout(pad=0.8)
     return fig
 
 
@@ -586,7 +608,7 @@ st.divider()
 if "Mode 1" in mode:
 
     # ── Section 1: Event Summary ──────────────────────────────────────────────
-    st.markdown('<p class="sec-header">① Event Summary</p>', unsafe_allow_html=True)
+    st.markdown("## ① Event Summary")
 
     c1, c2, c3 = st.columns([3, 1.2, 1.2])
     with c1:
@@ -615,8 +637,8 @@ if "Mode 1" in mode:
         """, unsafe_allow_html=True)
 
     # ── Section 2: Ripple Network ─────────────────────────────────────────────
-    st.markdown('<p class="sec-header">② Ripple Network Visualization</p>',
-                unsafe_allow_html=True)
+    st.markdown('<div class="section-gap"></div>', unsafe_allow_html=True)
+    st.markdown("## ② Ripple Network Visualization")
 
     node_sizes_m1 = {
         t: int(400 + rf_results[t]["confidence"] * 1400)
@@ -637,11 +659,11 @@ if "Mode 1" in mode:
     legend_ax.legend(
         handles=mode1_legend(),
         loc="lower left",
-        framealpha=0.25,
-        facecolor="#1e1e1e",
-        edgecolor="#444",
-        labelcolor="white",
-        fontsize=8,
+        framealpha=0.9,
+        facecolor="white",
+        edgecolor="#cccccc",
+        labelcolor="#333333",
+        fontsize=9,
     )
     st.pyplot(fig, use_container_width=True)
     plt.close(fig)
@@ -653,14 +675,15 @@ if "Mode 1" in mode:
     )
 
     # ── Section 3: Impact Leaderboard ─────────────────────────────────────────
-    st.markdown('<p class="sec-header">③ Impact Leaderboard</p>', unsafe_allow_html=True)
+    st.markdown('<div class="section-gap"></div>', unsafe_allow_html=True)
+    st.markdown("## ③ Impact Leaderboard")
 
     df = build_leaderboard_df(rf_results, comp)
     st.dataframe(
         style_leaderboard(df),
         use_container_width=True,
         hide_index=True,
-        height=415,
+        height=460,
     )
 
     st.markdown("""
@@ -678,7 +701,8 @@ if "Mode 1" in mode:
     """, unsafe_allow_html=True)
 
     # ── Section 4: Model Comparison ───────────────────────────────────────────
-    st.markdown('<p class="sec-header">④ Model Comparison</p>', unsafe_allow_html=True)
+    st.markdown('<div class="section-gap"></div>', unsafe_allow_html=True)
+    st.markdown("## ④ Model Comparison")
 
     st.dataframe(
         style_model_comparison(build_model_comparison_df()),
@@ -711,8 +735,7 @@ else:
     rf_model, scaler = build_rf_model()
 
     # ── Section 1: Search ─────────────────────────────────────────────────────
-    st.markdown('<p class="sec-header">① Describe a Macro Event</p>',
-                unsafe_allow_html=True)
+    st.markdown("## ① Describe a Macro Event")
 
     col_txt, col_btn = st.columns([5, 1])
     with col_txt:
@@ -729,7 +752,8 @@ else:
     if event_input:
         matched_tickers = map_event_to_tickers(event_input)
 
-        st.markdown('<p class="sec-header">② Sector Mapper</p>', unsafe_allow_html=True)
+        st.markdown('<div class="section-gap"></div>', unsafe_allow_html=True)
+        st.markdown("## ② Sector Mapper")
         if matched_tickers:
             st.markdown(
                 f"**Matched tickers** from event keywords: "
@@ -794,8 +818,8 @@ else:
         live_res  = res_data["results"]
         n_arts    = res_data["n_articles"]
 
-        st.markdown('<p class="sec-header">③ Ripple Prediction Results</p>',
-                    unsafe_allow_html=True)
+        st.markdown('<div class="section-gap"></div>', unsafe_allow_html=True)
+        st.markdown("## ③ Ripple Prediction Results")
 
         st.info(
             f"**Event:** {res_data['event']}  \n"
